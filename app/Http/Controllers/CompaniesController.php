@@ -64,8 +64,8 @@ class CompaniesController extends Controller
         ]);
         if ($request->hasFile("logo"))
         {
-             if($request->logo && Storage::disk("public")->exists($request->logo)){
-                Storage::disk("public")->delete($request->logo);
+            if($request->logo){
+                unlink(storage_path('app/public/' . $company->logo));
             }
             $validated["logo"] = $request->file("logo")->store("logos","public");
         }
@@ -74,8 +74,8 @@ class CompaniesController extends Controller
     }
     public function destroy(Company $company)
     {
-        if ($company->logo && Storage::exists($company->logo)) {
-            Storage::delete($company->logo);
+        if ($company->logo) {
+            unlink(storage_path('app/public/' . $company->logo));
         }
         $company->delete();
         return redirect()->route('companies.index')->with('success', 'Company deleted successfully');
