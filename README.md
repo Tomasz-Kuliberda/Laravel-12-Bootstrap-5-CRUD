@@ -56,7 +56,11 @@ php artisan migrate
 ```sh
 php artisan db:seed
 ```
-8. Run the project
+8. Create the symbolic link for image storage
+```sh
+php artisan storage:link
+```
+9. Run the project
 ```sh
 php artisan serve
 ```
